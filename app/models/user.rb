@@ -11,19 +11,19 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :encrypted_password, presence: true,
                        length: { minimum: 6 },
-                       format: {　with: 
+                       format: { with: 
                        VALID_PASSWORD_REGEX}
   validates :first_name, presence: true,
-                       format: {　with: 
+                       format: { with: 
                        VALID_NAME_REGEX}
   validates :last_name, presence: true,
-                       format: {　with: 
+                       format: { with: 
                        VALID_NAME_REGEX}
   validates :first_name_kana, presence: true,
-                       format: {　with: 
+                       format: { with: 
                        VALID_NAME_KANA_REGEX}
   validates :last_name_kana, presence: true,
-                       format: {　with: 
+                       format: { with: 
                        VALID_NAME_KANA_REGEX}
   validates :birth_date, presence: true
 end
