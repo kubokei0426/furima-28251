@@ -21,8 +21,9 @@
 
 | Column        | Type    | Options                        |
 | --------      | ------  | -----------                    |
+| image         | text  | null: false                    |
 | name          | string  | null: false                    |
-| text          | text  | null: false                      |
+| text          | text    | null: false                    |
 | price         | integer | null: false                    |
 | category_id   | integer | null: false                    |
 | status_id     | integer | null: false                    |

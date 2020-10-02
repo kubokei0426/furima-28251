@@ -13,6 +13,16 @@
 ActiveRecord::Schema.define(version: 2020_09_21_082546) do
 
   create_table "exhibitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "image"
+    t.string "name"
+    t.text "text"
+    t.integer "price"
+    t.integer "category_id"
+    t.integer "status_id"
+    t.integer "fee_id"
+    t.integer "prefecture_id"
+    t.integer "delivery_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
