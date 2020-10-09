@@ -82,6 +82,12 @@ RSpec.describe Exhibition, type: :model do
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("販売価格を入力してください")
       end 
+      it "販売価格が全角だと出品は保存できない" do
+        @exhibition.price = "３００"
+        @exhibition.valid?
+        binding.pry
+        expect(@exhibition.errors.full_messages).to include("販売価格は数値で入力してください")
+      end 
       it "販売価格が300未満だと出品は保存できない" do
         @exhibition.price = 299
         @exhibition.valid?
