@@ -32,31 +32,66 @@ RSpec.describe Exhibition, type: :model do
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("カテゴリーを入力してください")
       end 
+      it "カテゴリーがid:1だと出品は保存できない" do
+        @exhibition.category_id = 1
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("カテゴリーは1以外の値にしてください")
+      end 
       it "商品状態がないと出品は保存できない" do
         @exhibition.status_id = nil
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("商品状態を入力してください")
       end 
+      it "商品状態がid:1だと出品は保存できない" do
+        @exhibition.status_id = 1
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("商品状態は1以外の値にしてください")
+      end 
       it "配送料がないと出品は保存できない" do
         @exhibition.fee_id = nil
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("配送料を入力してください")
-      end      
+      end   
+      it "配送料がid:1だと出品は保存できない" do
+        @exhibition.fee_id = 1
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("配送料は1以外の値にしてください")
+      end    
       it "発送元地域がないと出品は保存できない" do
         @exhibition.prefecture_id = nil
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("発送元地域を入力してください")
+      end 
+      it "発送元地域がid:1だと出品は保存できない" do
+        @exhibition.prefecture_id= 1
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("発送元地域は1以外の値にしてください")
       end 
       it "発送日数がないと出品は保存できない" do
         @exhibition.delivery_id = nil
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("発送日数を入力してください")
       end 
+      it "発送日数がid:1だと出品は保存できない" do
+        @exhibition.delivery_id = 1
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("発送日数は1以外の値にしてください")
+      end 
       it "販売価格がないと出品は保存できない" do
         @exhibition.price = nil
         @exhibition.valid?
         expect(@exhibition.errors.full_messages).to include("販売価格を入力してください")
       end 
+      it "販売価格が300未満だと出品は保存できない" do
+        @exhibition.price = 299
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("販売価格は300以上の値にしてください")
+      end
+      it "販売価格が10,000,000以上だと出品は保存できない" do
+        @exhibition.price = 10000000
+        @exhibition.valid?
+        expect(@exhibition.errors.full_messages).to include("販売価格は10000000より小さい値にしてください")
+      end  
       it "ユーザーが紐付いていないと出品は保存できない" do
         @exhibition.user = nil
         @exhibition.valid?
