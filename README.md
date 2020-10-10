@@ -36,12 +36,13 @@
 - belongs_to :user
 - has_one :purchase
 
-## purchasesテーブル
+## purchasersテーブル
 
 | Column         | Type    | Options                       |
 | --------       | ------  | -----------                   |
-|  exhibition_id | integer | null: false,foreign_key: true |
-|  user_id       | integer | null: false,foreign_key: true |
+| exhibition_id  | integer | null: false,foreign_key: true |
+| user_id        | integer | null: false,foreign_key: true |
+| shipping_id    | integer | null: false,foreign_key: true |
 
 ### Association
 - belongs_to :user
