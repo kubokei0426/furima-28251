@@ -1,6 +1,7 @@
 class ExhibitionsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   def index
+    @exhibitions = Exhibition.all
   end
 
   def new
