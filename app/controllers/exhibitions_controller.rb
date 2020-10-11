@@ -1,7 +1,7 @@
 class ExhibitionsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   def index
-    @exhibitions = Exhibition.all.order("created_at DESC")
+    @exhibitions = Exhibition.all.order('created_at DESC')
   end
 
   def new
