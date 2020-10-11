@@ -21,7 +21,7 @@
 
 | Column        | Type    | Options                        |
 | --------      | ------  | -----------                    |
-| image         | text  | null: false                    |
+| image         | text    | null: false                    |
 | name          | string  | null: false                    |
 | text          | text    | null: false                    |
 | price         | integer | null: false                    |
@@ -31,17 +31,19 @@
 | prefecture_id | integer | null: false                    |
 | delivery_id   | integer | null: false                    |
 | user_id       | integer | null: false, foreign_key: true |
+| purchaser_id  | integer | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :purchase
 
-## purchasesテーブル
+## purchasersテーブル
 
 | Column         | Type    | Options                       |
 | --------       | ------  | -----------                   |
-|  exhibition_id | integer | null: false,foreign_key: true |
-|  user_id       | integer | null: false,foreign_key: true |
+| exhibition_id  | integer | null: false,foreign_key: true |
+| user_id        | integer | null: false,foreign_key: true |
+| shipping_id    | integer | null: false,foreign_key: true |
 
 ### Association
 - belongs_to :user
