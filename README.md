@@ -21,7 +21,7 @@
 
 | Column        | Type    | Options                        |
 | --------      | ------  | -----------                    |
-| image         | text  | null: false                    |
+| image         | text    | null: false                    |
 | name          | string  | null: false                    |
 | text          | text    | null: false                    |
 | price         | integer | null: false                    |
@@ -31,6 +31,7 @@
 | prefecture_id | integer | null: false                    |
 | delivery_id   | integer | null: false                    |
 | user_id       | integer | null: false, foreign_key: true |
+| purchaser_id  | integer | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
