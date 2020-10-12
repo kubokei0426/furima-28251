@@ -44,7 +44,7 @@
     <%# //ログインしていて、なおかつ、ログインしているユーザと出品しているユーザが同一人物でないとき表示しましょう。 %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @exhibition.text %></span>
     </div>
     <table class="detail-table">
       <tbody>
@@ -109,7 +109,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class='another-item'><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class='another-item'><%= @exhibition.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
