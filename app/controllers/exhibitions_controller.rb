@@ -11,11 +11,19 @@ class ExhibitionsController < ApplicationController
   def create
     @exhibition = Exhibition.new(exhibition_params)
     if @exhibition.save
-      redirect_to root_path
+       redirect_to root_path
     else
-      render :new
+       render :new
     end
   end
+
+  def destroy
+    exhibition = Exhibition.find(params[:id])
+     if exhibition.user_id == current_user.id
+        exhibition.destroy
+        redirect_to root_path
+     end
+   end
 
   def show
     @exhibition = Exhibition.find(params[:id])
