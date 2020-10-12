@@ -17,6 +17,10 @@ class ExhibitionsController < ApplicationController
     end
   end
 
+  def show
+    @exhibition = Exhibition.find(params[:id])
+  end
+
   private
 
   def exhibition_params
