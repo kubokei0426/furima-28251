@@ -1,6 +1,8 @@
 class ExhibitionsController < ApplicationController
-  before_action :set_exhibition, only: [:destroy, :show]
+  before_action :set_exhibition, only: [:destroy, :show, :edit, :update]
+  before_action :ensure_user_id, only: [:destroy, :edit, :update]
   before_action :move_to_index, except: [:index, :show]
+
   def index
     @exhibitions = Exhibition.all.order('created_at DESC')
   end
@@ -12,18 +14,27 @@ class ExhibitionsController < ApplicationController
   def create
     @exhibition = Exhibition.new(exhibition_params)
     if @exhibition.save
-       redirect_to root_path
+      redirect_to root_path
     else
-       render :new
+      render :new
     end
   end
 
   def destroy
-     if @exhibition.user_id == current_user.id
-        @exhibition.destroy
-        redirect_to root_path
-     end
-   end
+    @exhibition.destroy
+    redirect_to root_path
+  end
+
+  def edit
+  end
+
+  def update
+    if @exhibition.update(exhibition_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
 
   def show
   end
@@ -43,4 +54,7 @@ class ExhibitionsController < ApplicationController
     @exhibition = Exhibition.find(params[:id])
   end
 
+  def ensure_user_id
+    redirect_to action: :index if @exhibition.user_id != current_user.id
+  end
 end
