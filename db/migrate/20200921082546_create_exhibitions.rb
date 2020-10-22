@@ -10,8 +10,7 @@ class CreateExhibitions < ActiveRecord::Migration[6.0]
       t.integer :fee_id,           null: false
       t.integer :prefecture_id,           null: false
       t.integer :delivery_id,           null: false
-      t.integer :user_id,           null: false
-      t.integer :purchaser_id
+      t.references :user_id,           null: false,foreign_key: true
       t.timestamps
     end
   end

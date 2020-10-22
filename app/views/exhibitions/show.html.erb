@@ -34,7 +34,7 @@
     <% if user_signed_in?%>
       <% unless current_user.id == @exhibition.user_id %>
         <% unless @exhibition.purchaser_id.present? %>
-          <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+          <%= link_to '購入画面に進む',exhibition_purchasers_path(@exhibition.id), method: :get, class:"item-red-btn"%>
         <% end %>
       <% end %>
     <% end %>

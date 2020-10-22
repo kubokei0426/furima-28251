@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :exhibitions
+  has_many :purchasers
   with_options presence: true do
     VALID_PASSWORD_REGEX = /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\z/.freeze
     VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]+\z/.freeze
