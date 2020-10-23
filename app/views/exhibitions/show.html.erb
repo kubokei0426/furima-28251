@@ -9,7 +9,7 @@
     <div class='item-img-content'>
       <%= image_tag @exhibition.image ,class:"item-box-img" %>
 
-      <% if @exhibition.purchaser_id.present?%>
+      <% if @exhibition.purchaser.present?%>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
@@ -33,8 +33,8 @@
 
     <% if user_signed_in?%>
       <% unless current_user.id == @exhibition.user_id %>
-        <% unless @exhibition.purchaser_id.present? %>
-          <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+        <% unless @exhibition.purchaser.present? %>
+          <%= link_to '購入画面に進む',exhibition_purchasers_path(@exhibition.id), method: :get, class:"item-red-btn"%>
         <% end %>
       <% end %>
     <% end %>
