@@ -5,9 +5,9 @@ RSpec.describe Exhibition, type: :model do
     @exhibition = FactoryBot.build(:exhibition)
   end
 
-  describe '出品の保存' do
+  describe '出品情報の保存' do
     context '出品が保存できる場合' do
-      it '出品画像と商品名と商品の説明とカテゴリーと商品の状態と配送料の負担と発送元の地域と発送までの日数と販売価格があれば出品は保存される' do
+      it 'すべての値が正しく入力されていれば保存できること' do
         expect(@exhibition).to be_valid
       end
     end
