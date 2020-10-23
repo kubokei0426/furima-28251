@@ -1,8 +1,9 @@
 class PurchasersController < ApplicationController
   before_action :set_exhibition, only: [:index, :create]
-
+  before_action :ensure_user_id, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
   def index
-    redirect_to root_path unless user_signed_in?
+    redirect_to user_session_path unless user_signed_in?
   end
 
   def create
@@ -34,4 +35,13 @@ class PurchasersController < ApplicationController
   def set_exhibition
     @exhibition = Exhibition.find(params[:exhibition_id])
   end
+
+  def ensure_user_id
+    redirect_to root_path if current_user.id == @exhibition.user_id
+  end
+
+  def move_to_index
+    redirect_to root_path if @exhibition.purchaser.present?
+  end
+
 end
