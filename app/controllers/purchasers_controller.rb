@@ -1,42 +1,37 @@
 class PurchasersController < ApplicationController
-  before_action :set_exhibition, only: [:index,:create]
+  before_action :set_exhibition, only: [:index, :create]
 
-  def index 
-    unless user_signed_in?
-      redirect_to root_path
-    end
+  def index
+    redirect_to root_path unless user_signed_in?
   end
 
   def create
-    binding.pry
     @purchaser_shipping = PurchaserShipping.new(shipping_params)
     if @purchaser_shipping.valid?
       pay_purchaser
       @purchaser_shipping.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index'
     end
   end
 
   def pay_purchaser
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @exhibition.price,
-      card: purchaser_params[:token],
-      currency: 'jpy',
+      card: shipping_params[:token],
+      currency: 'jpy'
     )
-    @exhibition.update(purchaser_id: current_user.id)
   end
 
   private
+
   def shipping_params
-    params.require(:purchaser_shipping).permit(:token,:postal_code,:city,:addresses,:phone_number,:city,:prefecture_id,:building,:exhibition_id)
+    params.permit(:token, :exhibition_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, purchaser_id: current_user.id)
   end
 
   def set_exhibition
     @exhibition = Exhibition.find(params[:exhibition_id])
   end
-
-
 end

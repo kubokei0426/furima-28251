@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_090313) do
+ActiveRecord::Schema.define(version: 2020_10_21_155348) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -34,19 +34,40 @@ ActiveRecord::Schema.define(version: 2020_10_14_090313) do
   end
 
   create_table "exhibitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "image"
-    t.string "name"
-    t.text "text"
-    t.integer "price"
-    t.integer "category_id"
-    t.integer "status_id"
-    t.integer "fee_id"
-    t.integer "prefecture_id"
-    t.integer "delivery_id"
-    t.integer "user_id"
+    t.string "name", null: false
+    t.text "text", null: false
+    t.integer "price", null: false
+    t.integer "category_id", null: false
+    t.integer "status_id", null: false
+    t.integer "fee_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "delivery_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "purchaser_id"
+    t.index ["user_id"], name: "index_exhibitions_on_user_id"
+  end
+
+  create_table "purchasers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "exhibition_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exhibition_id"], name: "index_purchasers_on_exhibition_id"
+    t.index ["user_id"], name: "index_purchasers_on_user_id"
+  end
+
+  create_table "shippings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "postal_code", default: "", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", default: "", null: false
+    t.string "addresses", default: "", null: false
+    t.string "building", default: ""
+    t.string "phone_number", default: "", null: false
+    t.bigint "purchaser_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchaser_id"], name: "index_shippings_on_purchaser_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -68,4 +89,8 @@ ActiveRecord::Schema.define(version: 2020_10_14_090313) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exhibitions", "users"
+  add_foreign_key "purchasers", "exhibitions"
+  add_foreign_key "purchasers", "users"
+  add_foreign_key "shippings", "purchasers"
 end
