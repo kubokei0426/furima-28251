@@ -10,10 +10,10 @@ class User < ApplicationRecord
     VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]+\z/.freeze
     VALID_NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
     validates :nickname
-    validates :email
     validates :password, length: { minimum: 6 },
                          format: { with:
                       VALID_PASSWORD_REGEX}
+    validates :password_confirmation
     validates :first_name, format: { with:
                         VALID_NAME_REGEX}
     validates :last_name, format: { with:

@@ -8,6 +8,7 @@ class PurchasersController < ApplicationController
   end
 
   def create
+ 
     @purchaser_shipping = PurchaserShipping.new(shipping_params)
     if @purchaser_shipping.valid?
       pay_purchaser
