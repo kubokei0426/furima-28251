@@ -1,9 +1,10 @@
 class PurchasersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_exhibition, only: [:index, :create]
   before_action :ensure_user_id, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
+  
   def index
-    redirect_to user_session_path unless user_signed_in?
   end
 
   def create
@@ -45,3 +46,5 @@ class PurchasersController < ApplicationController
   end
 
 end
+
+
