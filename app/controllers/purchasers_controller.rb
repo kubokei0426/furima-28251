@@ -3,12 +3,12 @@ class PurchasersController < ApplicationController
   before_action :set_exhibition, only: [:index, :create]
   before_action :ensure_user_id, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
-  
+
   def index
+    @purchaser_shipping = PurchaserShipping.new
   end
 
   def create
- 
     @purchaser_shipping = PurchaserShipping.new(shipping_params)
     if @purchaser_shipping.valid?
       pay_purchaser
@@ -45,7 +45,4 @@ class PurchasersController < ApplicationController
   def move_to_index
     redirect_to root_path if @exhibition.purchaser.present?
   end
-
 end
-
-

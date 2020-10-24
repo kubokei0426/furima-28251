@@ -2,7 +2,6 @@ class ExhibitionsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_exhibition, only: [:destroy, :show, :edit, :update]
   before_action :ensure_user_id, only: [:destroy, :edit, :update]
- 
 
   def index
     @exhibitions = Exhibition.all.order('created_at DESC')
