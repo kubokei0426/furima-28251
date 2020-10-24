@@ -31,7 +31,7 @@ class PurchasersController < ApplicationController
   private
 
   def shipping_params
-    params.permit(:token, :exhibition_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, purchaser_id: current_user.id)
+    params.require(:purchaser_shipping).permit(:token, :exhibition_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, purchaser_id: current_user.id)
   end
 
   def set_exhibition
