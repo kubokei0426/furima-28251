@@ -12,7 +12,7 @@ class PurchaserShipping
   validates :prefecture_id, numericality: { other_than: 1 }
 
   def save
-    purchaser = Purchaser.create(exhibition_id: @exhibition_id, user_id: user_id)
+    purchaser = Purchaser.create(exhibition_id: exhibition_id, user_id: user_id)
     Shipping.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, addresses: addresses, building: building,
                     phone_number: phone_number, purchaser_id: purchaser.id)
   end
