@@ -6,13 +6,11 @@ class User < ApplicationRecord
   has_many :exhibitions
   has_many :purchasers
   with_options presence: true do
-    VALID_PASSWORD_REGEX = /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\z/.freeze
+    VALID_PASSWORD_REGEX = /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}+\z/.freeze
     VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]+\z/.freeze
     VALID_NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
     validates :nickname
-    validates :password, length: { minimum: 6 },
-                         format: { with:
-                      VALID_PASSWORD_REGEX}
+    validates :password, format: { with:VALID_PASSWORD_REGEX}
     validates :password_confirmation
     validates :first_name, format: { with:
                         VALID_NAME_REGEX}
