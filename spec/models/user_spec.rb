@@ -14,14 +14,14 @@ describe User do
       end
 
       it 'passwordが6文字以上であれば登録できる' do
-        @user.password = '123abc123'
-        @user.password_confirmation = '123abc123'
+        @user.password = '123abc'
+        @user.password_confirmation = '123abc'
         expect(@user).to be_valid
       end
 
       it 'passwordが半角英数字混合であれば登録できる' do
-        @user.password = '123abc123'
-        @user.password_confirmation = '123abc123'
+        @user.password = '123abc'
+        @user.password_confirmation = '123abc'
         expect(@user).to be_valid
       end
 
